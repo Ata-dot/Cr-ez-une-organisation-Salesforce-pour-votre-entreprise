@@ -1,0 +1,115 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-26-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <lightning-card>
+    <h3 slot="title">
+      <lightning-icon icon-name="standard:opportunity" size=""></lightning-icon>
+      <span class="slds-p-left_small">{label.Opportunity_Products_Label}</span>
+      <!-- Utilisation de l'étiquette pour le titre -->
+    </h3>
+
+    <!-- Vérification : Si des produits sont disponibles -->
+    <template if:true={products.length}>
+      <!-- Message d'erreur si une ligne pose problème -->
+      <template if:true={hasQuantityError}>
+        <div class="slds-var-m-bottom_medium slds-col_padded-around-medium error-container">
+          <p>{label.Quantity_Error_Message}</p>
+          <!-- Message d'erreur avec étiquette personnalisée -->
+        </div>
+      </template>
+
+      <!-- Table affichant les produits -->
+      <div class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <table class="slds-table">
+          <thead>
+            <tr>
+              <!-- Colonnes demandées -->
+              <th>{label.Product_Name}</th>
+              <th>{label.Quantity}</th>
+              <th>{label.Unit_Price}</th>
+              <th>{label.Total_Price}</th>
+              <th>{label.Quantity_in_Stock}</th>
+              <th>{label.Delete_Label}</th>
+              <template if:true={isSystemAdmin}>
+                <th>{label.seeProductLabel}</th>
+              </template>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Parcourir chaque produit et créer une ligne dans le tableau -->
+            <template for:each={products} for:item="product">
+              <tr key={product.Id}>
+                <!-- Nom du produit -->
+                <td>{product.Product2.Name}</td>
+
+                <!-- Quantité -->
+                <td class={product.rowClass} role="gridcell">
+                  <span class={product.quantityClass}>{product.Quantity}</span>
+                </td>
+
+                <!-- Prix unitaire -->
+                <td>{product.UnitPrice}</td>
+
+                <!-- Prix total -->
+                <td>{product.TotalPrice}</td>
+
+                <!-- Quantité restante avec style conditionnel -->
+                <td>{product.Product2.QuantityInStock__c}</td>
+
+                <!-- Supprimer -->
+                <td>
+                  <lightning-button-icon
+                    icon-name="utility:delete"
+                    variant="bare"
+                    alternative-text={label.Delete_Label}
+                    onclick={handleDelete}
+                    data-id={product.Id}>
+                  </lightning-button-icon>
+                </td>
+
+                <!-- Voir produit (Visible uniquement pour les administrateurs système) -->
+                <template if:true={isSystemAdmin}>
+                  <td>
+                    <template if:false={isCommercial}>
+                      <lightning-button
+                        label={label.seeProductLabel}
+                        icon-name="utility:preview"
+                        variant="brand"
+                        onclick={handleViewProduct}
+                        data-id={product.Product2Id}>
+                      </lightning-button>
+                    </template>
+                  </td>
+                </template>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </template>
+
+    <!-- Message d'erreur -->
+    <template if:true={error}>
+      <div
+        class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-var-m-top_medium"
+        role="alert">
+        <span class="slds-assistive-text">{label.Quantity_Error_Message}</span>
+        <p>{error}</p>
+      </div>
+    </template>
+
+    <!-- Message par défaut si aucun produit n'est présent -->
+    <template if:false={products.length}>
+      <lightning-card>
+        <p class="slds-text-body_regular" style="padding: 1rem; text-align: center;">
+          {label.Product_Not_Found}
+        </p>
+      </lightning-card>
+    </template>
+  </lightning-card>
+</template>

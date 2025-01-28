@@ -1,0 +1,17 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-18-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={isSystemAdmin}>
+        <p>Vous etes un administrateur system</p>
+        <!-- Contenu spécifique pour les administrateurs système -->
+    </template>
+    <template if:true={isCommercial}>
+        <!-- Contenu spécifique pour les commerciaux -->
+        <p>Vous etes un commercial</p>
+    </template>
+</template>

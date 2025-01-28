@@ -1,0 +1,34 @@
+/* Encart orange pour le message d'erreur */
+.error-container {
+    background-color: #fffae6; /* Fond orange clair */
+    border: 1px solid #ff9800; /* Bordure orange */
+    color: #ff9800; /* Texte orange */
+    
+    
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Classe pour les cellules avec erreur */
+.error-cell {
+    background-color: #ffcccc; /* Rouge clair pour le fond */
+    color: #b71c1c; /* Rouge foncé pour le texte */
+    font-weight: bold; /* Texte en gras */
+    text-align: center; /* Centrer le contenu */
+    border: 1px solid #b71c1c; /* Bordure rouge */
+}
+
+/* Classe pour les lignes problématiques */
+.error-row { 
+    background-color: #f3f2f2; 
+    border: 1px solid #f3f2f2;;
+    /* var(rgb(243, 242, 242), var(rgb(238, 238, 238), #f0f0f0));  */
+    color: #b71c1c; 
+    font-weight: bold; /* Texte en gras */
+}
+.error-message {
+    background-color: #f8d7da; /* Rouge clair */
+    color: #721c24; /* Texte rouge sombre */
+}
+.error-message { background-color: #f8d7da; /* Rouge clair */ color: #721c24; /* Texte rouge sombre */ padding: 10px; border-radius: 5px; border: var(--lwc-borderWidthThin, 1px) solid #f5c6cb;
+}
